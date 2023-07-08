@@ -17,13 +17,8 @@ impl Block {
     pub fn calculate_hash(&self) -> String {
         let mut hasher = crypto::sha2::Sha256::new();
         let data = format!(
-            "{}{}{}{}{}{}",
-            self.index,
-            self.timestamp,
-            self.prev_hash,
-            self.merkle_root,
-            self.difficulty,
-            self.nonce
+            "{}{}{}{}{}",
+            self.index, self.timestamp, self.prev_hash, self.difficulty, self.nonce
         );
         hasher.input_str(&data);
         hasher.result_str()
