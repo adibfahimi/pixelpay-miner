@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/adibfahimi/pixelpay-miner/core"
 	pcore "github.com/adibfahimi/pixelpay-node/core"
 )
 
@@ -70,9 +69,8 @@ func sendBlock(block pcore.Block, nodeAddress string) error {
 	return nil
 }
 
-func MineSolo(nodeAddress string) {
+func MineSolo(nodeAddress string, address string) {
 	log.Println("Mining block ...")
-	w := core.LoadWallet()
 
 	for {
 		log.Println("Getting block ...")
@@ -85,7 +83,7 @@ func MineSolo(nodeAddress string) {
 		} else {
 			coinBaseTx := pcore.Tx{
 				From:      "",
-				To:        w.Address,
+				To:        address,
 				Signature: "",
 				Hash:      "",
 				Amount:    d.Data.MineReward,

@@ -7,20 +7,16 @@ This project is a miner specifically designed for [Pixelpay](https://github.com/
 ### Solo Mining
 
 To start mining solo, use the following command:
+Replace `YOUR_ADDRESS` with your actual Pixelpay address.
 
 ```bash
-pixelpay-miner -solo -address YOUR_ADDRESS -node-address eu.pixelpay.org
+pixelpay-miner -solo eu.pixelpay.org -address YOUR_ADDRESS
 ```
-
-Replace `YOUR_ADDRESS` with your actual Pixelpay address.
 
 ### Pool Mining
 
 If you prefer to mine in a pool, use the following command:
 
 ```bash
-pixelpay-miner -pool -address YOUR_ADDRESS -pool-address pool.pixelpay.org
+pixelpay-miner -pool pool.pixelpay.org -address YOUR_ADDRESS
 ```
-
-Again, replace `YOUR_ADDRESS` with your actual Pixelpay address.
-Happy mining!

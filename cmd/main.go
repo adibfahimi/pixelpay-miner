@@ -4,28 +4,33 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/adibfahimi/pixelpay-miner/core"
 	"github.com/adibfahimi/pixelpay-miner/mine"
+	"github.com/adibfahimi/pixelpay-miner/utils"
 )
 
 func main() {
-	isSolo := flag.Bool("solo", false, "Mine in solo mode")
-	nodeAddress := flag.String("node-address", "", "Set node address for solo mining")
-	isPool := flag.Bool("pool", false, "Mine in pool mode")
-	poolAddress := flag.String("pool-address", "", "Set pool address for pool mining")
-	isWallet := flag.Bool("wallet", false, "Show your wallet")
-	isAddress := flag.String("address", "", "Set wallet address")
+	nodeAddress := flag.String("node", "", "set node address for solo mining")
+	poolAddress := flag.String("pool", "", "set pool address for pool mining")
+	address := flag.String("address", "", "set wallet address")
 
 	flag.Parse()
 
-	if *isSolo {
-		mine.MineSolo(*nodeAddress)
-	} else if *isPool {
-		mine.MinePool(*poolAddress)
-	} else if *isWallet {
-		core.ShowWallet()
-	} else if *isAddress != "" {
-		core.LoadWallet()
+	if *address == "" {
+		fmt.Println("no wallet address provided")
+		return
+	}
+
+	if !utils.IsValidAddress(*address) {
+		fmt.Println("invalid wallet address")
+		return
+	}
+
+	if *nodeAddress != "" {
+		fmt.Println("start solo mining")
+		mine.MineSolo(*nodeAddress, *address)
+	} else if *poolAddress != "" {
+		fmt.Println("start pool mining")
+		mine.MinePool(*poolAddress, *address)
 	} else {
 		fmt.Println("no mode selected. For more information, use --help")
 	}

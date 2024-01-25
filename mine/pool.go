@@ -1,4 +1,4 @@
 package mine
 
-func MinePool(poolAddress string) {
+func MinePool(poolAddress string, address string) {
 }
